@@ -1,4 +1,4 @@
-image_path = "test.png"
+image_path = "test3.png"
 
 brick_lengths = [1, 2, 3, 4, 6, 8]
 #background_colors = [[255, 255, 255]]

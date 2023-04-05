@@ -35,22 +35,29 @@ for row in range(num_rows):
 		#	else:
 		#		end brick one back
 
-		if d.not_background(color) and not counter:
+		## TODO: store brick gaps, act on them, end brick when color changes, pixelate large images
+
+		if d.not_background(color) and not counter: ## pixel is colored and not currently drawing a brick
 			d.start_brick(row, col, out_arr, color)
 			counter = 1
 			start_col = col
 
-		elif d.not_background(color) and counter:
-			if counter + 1 == max_len:
+		elif d.not_background(color) and counter: ## pixel is colored and are currently drawing a brick
+			if counter + 1 == max_len: ## this is the final addition we can make to the current brick
 				# if gap, can't end here; need to make a shorter brick of possible length
-				d.end_brick(row, col, out_arr, color)
+				d.end_brick(row, col, out_arr, color, counter)
 				counter = 0
-			else:
+
+			else: ## can keep extending brick
 				d.continue_brick(row, col, out_arr, color)
 				counter += 1
-		elif counter:
-			d.end_brick(row, col-1, out_arr, color) # should make sure counter + 1 is a possible length
+
+		elif counter: ## pixel is not colored and are currently drawing a brick
+			d.end_brick(row, col-1, out_arr, in_arr[row][col-1], counter) # should make sure counter + 1 is a possible length, use color of last pixel in brick
 			counter = 0
+
+		if counter and col == num_cols - 1:  ## drawing a brick and are at the rightmost column of the image
+			d.end_brick(row, col, out_arr, color, counter)
 
 
 for col in range(num_cols):
@@ -64,4 +71,4 @@ for col in range(num_cols):
 
 
 out_img = Image.fromarray(out_arr)
-out_img.show()
+out_img.save(f"lego-{v.image_path}")

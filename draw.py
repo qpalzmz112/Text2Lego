@@ -29,10 +29,14 @@ def continue_brick(row, col, arr, color):
 		arr[row+1][col+i] = color
 		arr[row+2][col+i] = color
 
-def end_brick(row, col, arr, color):
+def end_brick(row, col, arr, color, counter):
 	row *= 4
 	col *= 4
-	for i in range(4):
+	if counter == 1:
+		start = 1
+	else:
+		start = 0
+	for i in range(start, 4):
 		arr[row][col+i] = border_color
 		arr[row+3][col+i] = border_color
 		arr[row+i][col+3] = border_color
