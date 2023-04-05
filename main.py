@@ -8,7 +8,12 @@ in_img = Image.open(v.image_path)
 in_arr = asarray(in_img)
 num_cols, num_rows = in_img.size
 
-out_arr = np.full((4*num_rows, 4*num_cols, 4), 255, dtype = np.uint8)
+if v.image_type == "png":
+	color_len = 4 ## rgba
+elif v.image_type ==  "jpg":
+	color_len = 3 ## rgb
+
+out_arr = np.full((4*num_rows, 4*num_cols, color_len), 255, dtype = np.uint8)
 
 max_len = max(v.brick_lengths)
 for row in range(num_rows):
@@ -31,22 +36,21 @@ for row in range(num_rows):
 		#		end brick one back
 
 		if d.not_background(color) and not counter:
-			d.start_brick(row, col, out_arr)
+			d.start_brick(row, col, out_arr, color)
 			counter = 1
 			start_col = col
 
 		elif d.not_background(color) and counter:
 			if counter + 1 == max_len:
 				# if gap, can't end here; need to make a shorter brick of possible length
-				d.end_brick(row, col, out_arr)
+				d.end_brick(row, col, out_arr, color)
 				counter = 0
 			else:
-				d.continue_brick(row, col, out_arr)
+				d.continue_brick(row, col, out_arr, color)
 				counter += 1
 		elif counter:
-			d.end_brick(row, col-1, out_arr) # should make sure counter + 1 is a possible length
+			d.end_brick(row, col-1, out_arr, color) # should make sure counter + 1 is a possible length
 			counter = 0
-
 
 
 for col in range(num_cols):
@@ -57,6 +61,7 @@ for col in range(num_cols):
 			brick = True
 		else:
 			brick = False
+
 
 out_img = Image.fromarray(out_arr)
 out_img.show()
