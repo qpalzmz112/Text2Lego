@@ -16,15 +16,16 @@ if num_cols > 50 or num_rows > 50:
 
 in_arr = asarray(in_img)
 
+if len(in_arr[0][0]) == 4:
+	color_type = "rgba"
+elif len(in_arr[0][0]) == 3:
+	color_type = "rgb"
 
-if v.image_type == "png":
-	color_len = 4 ## rgba
-elif v.image_type ==  "jpg":
-	color_len = 3 ## rgb
+d.set_color_length(len(color_type))
 
-out_arr = np.full((4*num_rows, 4*num_cols, color_len), 255, dtype = np.uint8)
+out_arr = np.full((4*num_rows, 4*num_cols, len(color_type)), 255, dtype = np.uint8)
 
-
+previous_gaps = []
 for row in range(num_rows):
 	brick_length = 0
 	new_gaps = []
@@ -33,9 +34,9 @@ for row in range(num_rows):
 		if v.color_mode == 0:
 			color = in_arr[row][col]
 		elif brick_length == 0:
-			if v.image_type == "png":
+			if color_type == "rgba":
 				color = random.choice(v.lego_colors_rgba)
-			elif v.image_type == "jpg":
+			elif color_type == "rgb":
 				color = random.choice(v.lego_colors_rgb)
 
 		## TODO: preserve color (end brick when color changes)

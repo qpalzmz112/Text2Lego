@@ -1,10 +1,11 @@
 import variables as v
 
-if v.image_type == "png":
-	border = [174, 109, 226, 153] ## a nice lilac color
-elif v.image_type == "jpg":
-	border = [108, 68, 140]
-
+def set_color_length(length):
+	global border
+	if length == 4:
+		border = [174, 109, 226, 153] ## a nice lilac color
+	elif length == 3:
+		border = [108, 68, 140]
 
 ## The draw functions take in a pixel coordinate from
 ## the input image, and use that as the top left coordinate
@@ -67,7 +68,19 @@ def draw_stud(row, col, arr, color=[-1]):
 	arr[row+3][col+1] = border_color
 	arr[row+3][col+2] = border_color
 
-def not_background(arr):
+def not_background(color):
+	if len(border) == 4:
+		for bgcolor in v.background_colors_rgba:
+			if same_color(color, bgcolor):
+				return False
+
+	elif len(border) == 3:
+		for bgcolor in v.background_colors_rgb:
+			if same_color(color, bgcolor):
+				return False
+
+	return True
+
 	if v.image_type == "png": 
 		if arr[0] == 0 and arr[1] == 0 and arr[2] == 0: ## rgba: [0,0,0,0] is transparent, [0,0,0,255] is black
 			return arr[3] != 0 ## return true if pixel is not transparent

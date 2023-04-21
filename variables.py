@@ -1,9 +1,12 @@
-image_path = "test3.png"
+image_path = "test4.png"
+
 
 color_mode = 0 # 0: preserve image color, 1: randomly color bricks
 studs_on_all_bricks = False
 brick_lengths = [1, 2, 3, 4]
-#background_colors = [[255, 255, 255]]
+
+background_colors_rgb = [[255, 255, 255]]
+background_colors_rgba = [[0, 0, 0, 0], [255, 255, 255, 255]]
 
 lego_colors_hex = ["F4F4F4", "CCB98D", "BB805A", "B40000", "1E5AA8", "FAC80A", "000000", "00852B", "00852B", "91501C", "7396C8", "D67923", "069D9F", "A5CA18",
                "901F76", "70819A", "897D62", "19325A", "00451A", "708E7C", "720012", "FCAC00", "5F3109", "969696", "646464", "9DC3F7", "C8509B", "FF9ECD",
@@ -25,9 +28,3 @@ lego_colors_rgba = [[204, 185, 141, 255], [187, 128, 90, 255], [180, 0, 0, 255],
                     [255, 158, 205, 255], [255, 236, 108, 255], [68, 26, 145, 255], [225, 190, 161, 255], [53, 33, 0, 255], [170, 125, 85, 255], 
                     [70, 155, 195, 255], [104, 195, 226, 255], [211, 242, 234, 255], [160, 110, 185, 255], [205, 164, 222, 255], [226, 249, 154, 255], 
                     [139, 132, 79, 255], [253, 95, 132, 255], [245, 245, 0, 255], [117, 89, 69, 255], [204, 163, 115, 255]]
-
-
-if image_path.endswith(".jpg"):
-    image_type = "jpg"
-elif image_path.endswith(".png"):
-    image_type = "png"
