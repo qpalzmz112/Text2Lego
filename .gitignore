@@ -6,6 +6,7 @@
 # Additions
 *.png
 *.jpg
+*.xml
 
 # User-specific files
 *.rsuser
