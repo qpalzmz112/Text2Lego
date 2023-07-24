@@ -1,7 +1,7 @@
-image_path = "test4.png"
+image_path = "test.png"
 
-
-color_mode = 0 # 0: preserve image color, 1: randomly color bricks
+img_or_mujoco = 1 # 0: output image, 1: simulate in mujoco
+color_mode = 1 # 0: preserve image color, 1: randomly color bricks
 studs_on_all_bricks = False
 brick_lengths = [1, 2, 3, 4]
 

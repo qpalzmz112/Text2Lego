@@ -81,14 +81,6 @@ def not_background(color):
 
 	return True
 
-	if v.image_type == "png": 
-		if arr[0] == 0 and arr[1] == 0 and arr[2] == 0: ## rgba: [0,0,0,0] is transparent, [0,0,0,255] is black
-			return arr[3] != 0 ## return true if pixel is not transparent
-		else:
-			return True
-	elif v.image_type == "jpg":
-		return arr[0] != 255 or arr[1] != 255 or arr[2] != 255 ## return true if color is not pure white
-
 def same_color(color1, color2):
 	for (num1, num2) in zip(color1, color2):
 		if num1 != num2:
