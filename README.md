@@ -10,7 +10,7 @@ Lego design with colors matching the source image:
 
 <img src="https://github.com/qpalzmz112/Text2Lego/assets/68213464/318e1863-06ee-4713-94cf-5ab859533bbf" width="450" height="400">
 
-Lego design in MuJoCo with colors matching the source image:
+Lego design in MuJoCo with colors matching the source image: (Although some of these bricks look very long, they are actually just adjacent bricks of the same color)
 
 <img src="https://github.com/qpalzmz112/Text2Lego/assets/68213464/81d82f71-fe35-49bd-8c45-2ce290283ba3" width="450" height="400">
 
@@ -34,3 +34,4 @@ in the design match those of the source image.
 - make Lego design generation more robust - as of now, it only supports a fixed set of brick lengths: {1, 2, 3, 4}. This should at least support the longer bricks that Lego produces.
 - add a GUI so that Text2Lego is easier to use
 - find a suitable image-generation AI to use
+- add a way to differentiate adjacent bricks of the same color in MuJoCo
