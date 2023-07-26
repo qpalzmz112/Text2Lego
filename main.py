@@ -65,7 +65,7 @@ for row in range(num_rows):
 						d.end_brick(row, col, out_arr, color, brick_length)
 					else:
 						d.end_brick(row, col, out_arr, in_arr[row][col], brick_length)
-					current_brick[1] = brick_length - 1
+					current_brick[1] = brick_length
 					bricks.append(current_brick)
 					current_brick = [0, 0, 0]
 					brick_length = 0
@@ -125,10 +125,11 @@ for col in range(num_cols):
 		else:
 			brick = False
 
-if v.img_or_mujoco == 0:
+if v.img_or_mujoco != 1:
 	out_img = Image.fromarray(out_arr)
 	out_img.save(f"lego-{v.image_path}")
-	exit()
+	if v.img_or_mujoco == 0:
+		exit()
 
 f = open("lego_model.xml", "w+")
 f.write("<mujoco>\n  <worldbody>\n    <light pos=' 0 0 1'/>\n")
@@ -139,6 +140,6 @@ for brick in bricks:
 		f.write(f'    <geom type="box" pos="0 {round(brick[0][1] * 0.1 + .05*brick[1], 2)} {round(brick[0][0] * -0.1, 2)}" size=".05 {round(.05 * brick[1], 2)} .05" rgba="{brick[2][0]/255} {brick[2][1]/255} {brick[2][2]/255} 1"/>\n')
 f.write("  </worldbody>\n</mujoco>")
 f.close()
-print(bricks)
+
 os.system("python -m mujoco.viewer --mjcf=./lego_model.xml")
 # todo: make the above command work
